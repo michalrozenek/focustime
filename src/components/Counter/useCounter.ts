@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const timeChange = 5 * 60 // seconds
-
-let interval: ReturnType<typeof setTimeout>
 
 interface UseCounterProps {
   timeInMinutes: number
@@ -11,33 +9,52 @@ interface UseCounterProps {
 export const useCounter = ({ timeInMinutes }: UseCounterProps) => {
   const [seconds, setSeconds] = useState(timeInMinutes * 60)
 
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startInterval = () => {
+    if (!intervalRef.current) {
+      intervalRef.current = setInterval(() => {
+        setSeconds(prev => prev - 1);
+      }, 1000);
+    }
+  };
+
+  const stopInterval = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
   const increase = () => {
-    setSeconds(prev => prev + timeChange)
-  }
+    setSeconds(prev => prev + timeChange);
+    startInterval(); // Restart the interval if it was stopped
+  };
 
   const decrease = () => {
     setSeconds(prev => {
       if (prev > 60) {
-        return prev - timeChange
+        return prev - timeChange;
       }
-      return 0
-    })
-  }
+      return 0;
+    });
+    startInterval(); // Restart the interval if it was stopped
+  };
 
   useEffect(() => {
     if (seconds <= 0) {
-      setSeconds(0)
-      clearInterval(interval)
+      setSeconds(0);
+      stopInterval();
     }
-  }, [seconds])
+  }, [seconds]);
 
   useEffect(() => {
-    interval = setInterval(() => {
-      setSeconds(prev => prev - 1)
-    }, 1000)
+    startInterval(); // Start interval on mount
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => {
+      stopInterval(); // Cleanup on unmount
+    };
+  }, []);
 
   return {
     seconds,
