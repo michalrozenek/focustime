@@ -1,31 +1,50 @@
-
-import Button from '@mui/material/Button';
-import { Heading } from './components/Heading';
 import styled from '@emotion/styled';
-import { COLORS } from './constants/colors';
+import { COLOR } from './constants/colors';
+import { THEME } from './constants/theme';
+import { Header } from './components/Header/Header';
+import { ThemeProvider } from '@mui/material/styles';
+import Grid from '@mui/material/Grid2';
+import { Heading } from './components/Heading';
+import Box from '@mui/material/Box';
+import { TasksList } from './features/TasksList/TasksList';
+import { SPACING } from './constants/spacing';
+import { Task } from './features/Task/Task';
 
-const AppWrapper = styled.button`
+const AppWrapper = styled.div`
   min-height: 100vh;
   width: 100%;
   height: 100%;
-  padding: 32px;
   margin: 0;
-  background-color: ${COLORS.bg};
+  background-color: ${COLOR.bg};
   border-radius: 4px;
   font-size: 24px;
   font-weight: bold;
-  color: ${COLORS.text};
+  color: ${COLOR.text};
 
 `
 
 function App() {
   return (
-    <AppWrapper>
-      <Heading>
-        Hello there
-      </Heading>
-      <Button variant="contained">Hello world</Button>
-    </AppWrapper>
+    <ThemeProvider theme={THEME}>
+      <AppWrapper>
+        <Header />
+        <Grid container spacing={2}>
+          <Grid size={3}>
+            <Box sx={{ flexDirection: 'column', paddingTop: SPACING.lg }}>
+              <Box sx={{ marginLeft: SPACING.md }}>
+                <Heading as="h2">Tasks</Heading>
+              </Box>
+              <TasksList />
+            </Box>
+          </Grid>
+          <Grid size={9}>
+            <Box sx={{ p: '100px' }}>
+              <Task />
+            </Box>
+          </Grid>
+        </Grid>
+      </AppWrapper>
+    </ThemeProvider>
   )
 }
 
