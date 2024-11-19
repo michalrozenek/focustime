@@ -1,9 +1,7 @@
 import Box from '@mui/material/Box';
-import { Text } from '../Text'
-import { useCounter } from "./useCounter";
 import Fab from "@mui/material/Fab";
-import Plus from '@mui/icons-material/PlusOne';
-import AddIcon from '@mui/icons-material/Add';
+import { Text } from '../Text';
+import { useCounter } from "./useCounter";
 
 interface CounterProps {
   timeInMinutes: number
@@ -27,15 +25,15 @@ export const Counter = ({
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 3 }}>
-      <Fab color="primary" aria-label="reduce" size="medium" onClick={decrease}>
-        <Text>-5</Text>
+    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 3 }}>
+      <Fab color="primary" aria-label="reduce time" size="small" onClick={decrease}>
+        <Text size="lg">-</Text>
       </Fab>
       <Text size="xxl">
         {getTime()}
       </Text >
-      <Fab color="primary" aria-label="add" size="medium" onClick={increase}>
-        <Text>+5</Text>
+      <Fab color="primary" aria-label="add time" size="small" onClick={increase}>
+        <Text size="lg">+</Text>
       </Fab>
     </Box>
   )

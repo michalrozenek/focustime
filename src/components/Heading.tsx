@@ -6,7 +6,7 @@ import { FONT_SIZE, FontSize, FontSizeValue } from '../constants/fontSize';
 interface HeadingProps {
   as?: 'h1' | 'h2' | 'h3';
   size?: FontSize;
-  color?: Color
+  color?: Color;
   children: string;
 }
 

@@ -1,7 +1,7 @@
-import { blueGrey, deepOrange, red, grey } from '@mui/material/colors';
+import { blueGrey, deepOrange, red, grey, purple } from '@mui/material/colors';
 
 export const COLOR = {
-  bg: '#EAD2AD',
+  bg: blueGrey[50], //'#EAD2AD',
   accent: deepOrange[200],
   text: grey[900],
   contrast: grey[900],

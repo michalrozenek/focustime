@@ -4,9 +4,9 @@ import { blueGrey, deepOrange, red, grey } from '@mui/material/colors';
 export const THEME = createTheme({
   palette: {
     primary: {
-      light: red[200],
-      main: red[300],
-      dark: red[400],
+      light: blueGrey[200],
+      main: blueGrey[300],
+      dark: blueGrey[400],
       contrastText: grey[900],
     },
     secondary: {

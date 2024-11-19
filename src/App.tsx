@@ -32,14 +32,14 @@ function App() {
           <Grid size={3}>
             <Box sx={{ flexDirection: 'column', paddingTop: SPACING.lg }}>
               <Box sx={{ marginLeft: SPACING.md }}>
-                <Heading as="h2">Tasks</Heading>
+                <Heading as="h2">Tasks queue</Heading>
               </Box>
               <TasksList />
             </Box>
           </Grid>
           <Grid size={9}>
-            <Box sx={{ p: '100px' }}>
-              <Task />
+            <Box sx={{ p: SPACING.lg }}>
+              <Task timeInMinutes={15} />
             </Box>
           </Grid>
         </Grid>
