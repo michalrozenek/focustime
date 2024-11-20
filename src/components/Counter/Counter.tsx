@@ -2,6 +2,7 @@ import Box from '@mui/material/Box';
 import Fab from "@mui/material/Fab";
 import { Text } from '../Text';
 import { useCounter } from "./useCounter";
+import { Button } from '@mui/material';
 
 interface CounterProps {
   timeInMinutes: number
@@ -10,7 +11,7 @@ interface CounterProps {
 export const Counter = ({
   timeInMinutes
 }: CounterProps) => {
-  const { seconds, increase, decrease } = useCounter({ timeInMinutes })
+  const { seconds, increase, decrease, start } = useCounter({ timeInMinutes })
 
   const formatTime = (timeUnit: number) => {
     if (timeUnit <= 9) return `0${timeUnit}`
@@ -35,6 +36,9 @@ export const Counter = ({
       <Fab color="primary" aria-label="add time" size="small" onClick={increase}>
         <Text size="lg">+</Text>
       </Fab>
+      <Button onClick={start}>
+        start
+      </Button>
     </Box>
   )
 }

@@ -39,7 +39,7 @@ function App() {
           </Grid>
           <Grid size={9}>
             <Box sx={{ p: SPACING.lg }}>
-              <Task timeInMinutes={15} />
+              <Task />
             </Box>
           </Grid>
         </Grid>

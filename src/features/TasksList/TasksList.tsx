@@ -2,28 +2,22 @@ import List from "@mui/material/List"
 import ListItemButton from "@mui/material/ListItemButton"
 import ListItemText from "@mui/material/ListItemText"
 import { SPACING } from "../../constants/spacing"
+import { useAppDispatch, useAppSelector } from "../../store/store.hooks."
+import { setCurrentTask } from "../../store/tasks.slice"
 
 export const TasksList = () => {
-  const tasks: { idTask: string, title: string }[] = [
-    {
-      idTask: '123',
-      title: 'Code website',
-    },
-    {
-      idTask: '345',
-      title: 'Design'
-    }
-  ] // use redux instead
+  const tasks = useAppSelector((state) => state.tasks.tasks)
+  const dispatch = useAppDispatch()
 
-  const selectTask = () => console.log('select task')
+  const selectTask = (id_task: number) => dispatch(setCurrentTask({ id_task }))
 
   return (
     <List sx={{ flex: 1 }}>
       {tasks.map((task) => (
         <ListItemButton
-          key={task.idTask}
+          key={task.id_task}
           component="button"
-          onClick={selectTask}
+          onClick={() => selectTask(task.id_task)}
           sx={{ width: '100%', px: SPACING.lg }}
         >
           <ListItemText primary={task.title} />

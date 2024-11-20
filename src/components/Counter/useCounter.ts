@@ -7,7 +7,7 @@ interface UseCounterProps {
 }
 
 export const useCounter = ({ timeInMinutes }: UseCounterProps) => {
-  const [seconds, setSeconds] = useState(timeInMinutes * 60)
+  const [seconds, setSeconds] = useState(0)
 
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -41,6 +41,10 @@ export const useCounter = ({ timeInMinutes }: UseCounterProps) => {
     startInterval(); // Restart the interval if it was stopped
   };
 
+  const start = () => {
+    startInterval(); // Start interval on mount
+  }
+
   useEffect(() => {
     if (seconds <= 0) {
       setSeconds(0);
@@ -49,16 +53,17 @@ export const useCounter = ({ timeInMinutes }: UseCounterProps) => {
   }, [seconds]);
 
   useEffect(() => {
-    startInterval(); // Start interval on mount
+    setSeconds(timeInMinutes * 60)
 
     return () => {
       stopInterval(); // Cleanup on unmount
     };
-  }, []);
+  }, [timeInMinutes]);
 
   return {
     seconds,
     increase,
     decrease,
+    start,
   }
 }

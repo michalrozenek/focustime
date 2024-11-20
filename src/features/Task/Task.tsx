@@ -5,39 +5,34 @@ import { Heading } from "../../components/Heading";
 import { SPACING } from "../../constants/spacing";
 import { AddTask } from "./components/AddTask";
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/store.hooks.";
+import { addTask } from "../../store/tasks.slice";
+import { AddTaskFormFields } from "./components/AddTask.types";
 
-interface Task {
-  title: string;
-  description: string;
-  time: number;
-}
-
-interface TaskProps {
-  title?: string;
-  timeInMinutes?: number;
-}
-
-export const Task = ({
-  title,
-  timeInMinutes = 0
-}: TaskProps) => {
-  const [currentTask, setCurrentTaks] = useState<Task | null>(null)
+export const Task = () => {
   const [submitErrors, setSubmitErrors] = useState<string[]>([])
+  const currentTask = useAppSelector((state) => state.tasks.currentTask)
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const dispatch = useAppDispatch()
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => (fields: AddTaskFormFields) => {
     e.preventDefault()
-    const title = e.target.elements['title'].value
+
+    const title = fields.title
+
     if (!title) {
       return setSubmitErrors(['title'])
     }
 
     const task = {
-      title: e.target.elements['title'].value,
-      description: e.target.elements['description'].value,
-      time: e.target.elements['time'].value
+      title: fields.title,
+      description: fields.description,
+      time: fields.time,
+      startDate: fields.startNow ? Date.now() : undefined
     }
+
     setSubmitErrors([])
-    setCurrentTaks(task)
+    dispatch(addTask({ task }))
   }
 
   return (
@@ -45,8 +40,8 @@ export const Task = ({
       <Heading>Current task</Heading>
       <Heading as="h3">{currentTask?.title || ''}</Heading>
       <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'center', py: SPACING.xl, px: SPACING.xl }}>
-        <Counter timeInMinutes={timeInMinutes} />
-        {!title && (
+        <Counter timeInMinutes={currentTask?.time || 0} />
+        {!currentTask && (
           <AddTask errors={submitErrors} onSubmit={onSubmit} />
         )}
       </Box>
