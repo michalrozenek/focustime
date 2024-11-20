@@ -33,11 +33,6 @@ const tasksSlice = createSlice({
       state.tasks.push(task)
       state.currentTask = task
     },
-    // updateTask(state, action: PayloadAction<{ task: Pick<Task, 'endDate' | 'startDate' | 'rounds' | 'id_task'> }>) {
-    //   const task = state.tasks.find((task) => task.id_task === action.payload.task.id_task)
-    //   task?.endDate =
-    //   state.tasks.push(task)
-    // },
     removeTask(state, action: PayloadAction<{ id_task: number }>) {
       const tasks = state.tasks.filter((task) => task.id_task !== action.payload.id_task)
       state.tasks = tasks

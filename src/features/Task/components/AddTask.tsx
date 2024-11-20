@@ -1,4 +1,12 @@
-import { Button, Checkbox, FormControlLabel, FormGroup, FormLabel, Radio, RadioGroup } from "@mui/material"
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
+  Radio,
+  RadioGroup
+} from "@mui/material"
 import TextField from "@mui/material/TextField"
 import { useReducer } from "react";
 import { AddTaskFormFields } from "./AddTask.types";
@@ -34,7 +42,9 @@ interface AddTaskProps {
 }
 
 export const AddTask = ({ errors, onSubmit }: AddTaskProps) => {
-  const [state, dispatch] = useReducer<React.Reducer<AddTaskFormFields, FormAction>>(formReducer, initialFormValues)
+  const [state, dispatch] = useReducer<React.Reducer<AddTaskFormFields, FormAction>>(
+    formReducer, initialFormValues
+  )
 
   console.log({
     state

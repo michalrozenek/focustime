@@ -1,4 +1,4 @@
-import { blueGrey, deepOrange, red, grey, purple } from '@mui/material/colors';
+import { blueGrey, deepOrange, red, grey } from '@mui/material/colors';
 
 export const COLOR = {
   bg: blueGrey[50], //'#EAD2AD',

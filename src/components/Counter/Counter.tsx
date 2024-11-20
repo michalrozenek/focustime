@@ -26,7 +26,14 @@ export const Counter = ({
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 3 }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 3
+      }}>
       <Fab color="primary" aria-label="reduce time" size="small" onClick={decrease}>
         <Text size="lg">-</Text>
       </Fab>
