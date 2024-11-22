@@ -11,9 +11,11 @@ export const TasksList = () => {
 
   const selectTask = (id_task: number) => dispatch(setCurrentTask({ id_task }))
 
+  const tasksInQueue = tasks.filter((task) => !task.endDate)
+
   return (
     <List sx={{ flex: 1 }}>
-      {tasks.map((task) => (
+      {tasksInQueue.map((task) => (
         <ListItemButton
           key={task.id_task}
           component="button"

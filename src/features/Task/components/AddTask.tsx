@@ -110,7 +110,7 @@ export const AddTask = ({ errors, onSubmit }: AddTaskProps) => {
               onChange={handleStartNowChange}
             />}
         />
-        <Button type="submit">
+        <Button type="submit" variant="contained">
           Add a task
         </Button>
       </FormGroup>

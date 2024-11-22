@@ -3,13 +3,20 @@ import Fab from "@mui/material/Fab";
 import { Text } from '../Text';
 import { useCounter } from "./useCounter";
 import { Button } from '@mui/material';
+import { useEffect } from 'react';
 
 interface CounterProps {
+  automaticStart: boolean
   timeInMinutes: number
+  showStartButton: boolean
+  onStart: () => void
 }
 
 export const Counter = ({
-  timeInMinutes
+  automaticStart = false,
+  timeInMinutes,
+  showStartButton = false,
+  onStart
 }: CounterProps) => {
   const { seconds, increase, decrease, start } = useCounter({ timeInMinutes })
 
@@ -24,6 +31,15 @@ export const Counter = ({
 
     return `${formatTime(m)} : ${formatTime(s)}`
   }
+
+  const startCounter = () => {
+    onStart()
+    start()
+  }
+
+  useEffect(() => {
+    if (automaticStart) startCounter()
+  }, [automaticStart])
 
   return (
     <Box
@@ -43,9 +59,11 @@ export const Counter = ({
       <Fab color="primary" aria-label="add time" size="small" onClick={increase}>
         <Text size="lg">+</Text>
       </Fab>
-      <Button onClick={start}>
-        start
-      </Button>
+      {showStartButton && (
+        <Button onClick={startCounter}>
+          start
+        </Button>
+      )}
     </Box>
   )
 }

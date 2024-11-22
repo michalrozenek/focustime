@@ -1,4 +1,4 @@
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import PersonOutline from '@mui/icons-material/PersonOutline';
 import AppBar from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -36,7 +36,7 @@ export const Header = () => {
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+              <PersonOutline />
             </IconButton>
             <Menu
               id="menu-appbar"

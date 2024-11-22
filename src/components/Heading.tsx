@@ -1,20 +1,15 @@
-import styled from '@emotion/styled';
 import Typography from '@mui/material/Typography';
-import { Color, COLOR, ColorValue } from '../constants/colors';
-import { FONT_SIZE, FontSize, FontSizeValue } from '../constants/fontSize';
+import { Color, COLOR } from '../constants/colors';
+import { FONT_SIZE, FontSize,  } from '../constants/fontSize';
+import { ComponentProps } from 'react';
 
 interface HeadingProps {
   as?: 'h1' | 'h2' | 'h3';
   size?: FontSize;
   color?: Color;
   children: string;
+  sx?: ComponentProps<typeof Typography>['sx']
 }
-
-const StyledHeading = styled(Typography) <{ size: FontSizeValue, color?: ColorValue }>`
-  color: ${props => props.color};
-  font-size: ${props => props.size};
-  font-weight: bold;
-`
 
 const fontSize = {
   h1: FONT_SIZE.xl,
@@ -22,10 +17,15 @@ const fontSize = {
   h3: FONT_SIZE.md
 }
 
-export const Heading = ({ as = 'h2', children, size, color }: HeadingProps) =>
-  <StyledHeading
-    color={COLOR[color || 'text']}
+export const Heading = ({ as = 'h2', children, size, color = 'text', sx }: HeadingProps) =>
+  <Typography
     variant={as}
-    size={size ? FONT_SIZE[size] : fontSize[as]}>
+    sx={{
+      color: COLOR[color],
+      fontSize: size ? FONT_SIZE[size] : fontSize[as],
+      fontWeight: 600,
+      ...sx,
+    }}
+    >
     {children}
-  </StyledHeading>
+  </Typography>
